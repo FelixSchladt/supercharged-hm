@@ -2,7 +2,7 @@
 
 #import "@preview/drafting:0.2.2": *
 #import "@preview/glossarium:0.5.9": *
-#import "@preview/linguify:0.4.2": *
+#import "@preview/linguify:0.5.0": *
 
 #import "utils.typ": *
 #import "stringify.typ": *

@@ -1,6 +1,6 @@
 // Copyright 2024 Felix Schladt https://github.com/FelixSchladt
 
-#import "@preview/linguify:0.4.2": *
+#import "@preview/linguify:0.5.0": *
 
 #import "../colors.typ": *
 #import "../lang.typ": *
