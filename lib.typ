@@ -184,7 +184,7 @@
   // Display appendix.
   if appendix != none {
     heading(level: 1, linguify("base_appendix", from: lang-db))
-    include appendix
+    appendix
   }
 
   // Last Page, possible for reference, versioning & contact information
