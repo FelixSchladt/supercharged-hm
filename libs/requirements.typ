@@ -1,7 +1,7 @@
 // Copyright 2024 Felix Schladt https://github.com/FelixSchladt
 
 #import "@preview/drafting:0.2.2": *
-#import "@preview/glossarium:0.5.9": *
+#import "@preview/glossarium:0.5.10": *
 #import "@preview/linguify:0.5.0": *
 
 #import "utils.typ": *

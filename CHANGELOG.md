@@ -8,3 +8,7 @@
 
 - Bugfix: Though the appendix is expected as content, the template imported it as file.
 - Change: Renamed source repository to align with packet name 
+
+## [v0.1.2] - 2026-01-18
+
+- fix incorrectly scoped show rule for glossarium glossary rendering

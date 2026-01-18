@@ -3,7 +3,7 @@
 // Packages
 #import "@preview/hydra:0.6.2": hydra
 #import "@preview/linguify:0.5.0": *
-#import "@preview/glossarium:0.5.9": *
+#import "@preview/glossarium:0.5.10": *
 
 // Template
 #import "colors.typ": *

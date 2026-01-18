@@ -30,8 +30,8 @@
   body,
 ) = {
   // Setup glossary
+  show: make-glossary
   if glossary != none {
-    show: make-glossary
     register-glossary(glossary)
   }
   
