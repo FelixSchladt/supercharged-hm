@@ -67,6 +67,7 @@
     logo-dimensions: titlepage-logo-dimensions,
     toc-depth: toc-depth,
     text-size: text-size-template,
+    date: date,
   )
   
   set page(

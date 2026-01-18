@@ -9,7 +9,8 @@
   logo: none,
   logo-dimensions: (auto, auto),
   toc-depth: none,
-  text-size: 12pt
+  text-size: 12pt,
+  date: datetime.today(),
 ) = { 
   set page(
     footer: context{
@@ -29,7 +30,7 @@
     #v(0pt)
     #text(authors, size: 15pt)
     #v(0pt)
-    #text(datetime.today().display("[day]. [month repr:long] [year]"), size: 15pt)
+    #text(date.display("[day]. [month repr:long] [year]"), size: 15pt)
     #v(30pt)
   ]
 
