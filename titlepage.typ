@@ -8,6 +8,7 @@
   authors: "Authors",
   logo: none,
   logo-dimensions: (auto, auto),
+  toc-pagebreak: false,
   toc-depth: none,
   text-size: 12pt,
   date: datetime.today(),
@@ -44,7 +45,11 @@
     strong(it)
   }
   set text(size: text-size)
-  
+
+  if toc-pagebreak {
+    pagebreak()
+  }
+
   // TOC
   if toc-depth != none {
     outline(indent: auto, depth: toc-depth)

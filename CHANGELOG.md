@@ -1,5 +1,10 @@
 # Supercharged-HM Changelog
 
+## [IN DEVELOPMENT]
+
+- add `toc-pagebreak` option to show the table of contents on the next page instead of the title page (default `false`).
+- add `chapter-heading-pagebreak` option to disable the pagebreak before level 1 headings (default `true`).
+
 ## [v0.1.2] - 2026-01-18
 
 - fix incorrectly scoped show rule for glossarium glossary rendering

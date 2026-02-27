@@ -11,6 +11,7 @@
   doc-type: none,
   top-remark: none,
   show-table-of-contents: true,
+  toc-pagebreak: false,
   toc-depth: 2,
   appendix: none,
   language: "de",
@@ -25,6 +26,7 @@
   project-logo-dimensions: (auto, auto),
   titlepage-logo: none,
   titlepage-logo-dimensions: (auto, auto),
+  chapter-heading-pagebreak: true,
   lastpage: none,
   text-size: 12pt, //textsize for non header & footer text
   body,
@@ -65,6 +67,7 @@
     authors: authors,
     logo: titlepage-logo,
     logo-dimensions: titlepage-logo-dimensions,
+    toc-pagebreak: toc-pagebreak,
     toc-depth: toc-depth,
     text-size: text-size-template,
     date: date,
@@ -118,7 +121,11 @@
   
   // Heading settings
   show heading.where(level: 1): it => {
-    pagebreak()
+    if chapter-heading-pagebreak {
+      pagebreak()
+    } else {
+      v(2em)
+    }
     text(size: 20pt, it)
     v(1.25em)
   }
@@ -143,6 +150,10 @@
       disable-back-references: true
     )
   }
+ 
+  if not chapter-heading-pagebreak {
+    pagebreak()
+  }
 
   // ---------- Setup Chapter Headings -------------------
 
@@ -159,6 +170,10 @@
   // Non numbered headings
   set heading(numbering: none)
 
+
+  if not chapter-heading-pagebreak {
+    pagebreak()
+  }
 
   // Display bibliography.
   if bibliography != none {
@@ -184,12 +199,20 @@
 
   // Display appendix.
   if appendix != none {
+    if not chapter-heading-pagebreak {
+      pagebreak()
+    }
+
     heading(level: 1, linguify("base_appendix", from: lang-db))
     appendix
   }
 
   // Last Page, possible for reference, versioning & contact information
   if lastpage != none {
+    if not chapter-heading-pagebreak {
+      pagebreak()
+    }
+
     lastpage
   }
 
