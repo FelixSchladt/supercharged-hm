@@ -8,17 +8,9 @@
   authors: "Authors",
   logo: none,
   logo-dimensions: (auto, auto),
-  toc-pagebreak: false,
-  toc-depth: none,
   text-size: 12pt,
   date: datetime.today(),
-) = { 
-  set page(
-    footer: context{
-      align(center)[ 1 ]
-    }
-  )
-  
+) = {
   v(30pt)
 
   align(center)[
@@ -35,23 +27,5 @@
     #v(30pt)
   ]
 
-  show heading.where(level: 1): it => {
-    text(size: 15pt, it)
-  }
-  show outline.entry.where(
-    level: 1,
-  ): it => {
-    v(15pt, weak: true)
-    strong(it)
-  }
-  set text(size: text-size)
-
-  if toc-pagebreak {
-    pagebreak()
-  }
-
-  // TOC
-  if toc-depth != none {
-    outline(indent: auto, depth: toc-depth)
-  }
+  pagebreak()
 }
