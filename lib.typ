@@ -17,22 +17,37 @@
   appendix: none,
   language: "de",
   glossary: none,
+  abstract: none,
+  acknowledgements: none,
   bibliography: none,
   bib-style: "ieee",
-  font: "CMU Serif",
+  font: "Roboto",
   version: "0.1",
   authors: "",
+  city: none,
   date: datetime.today(),
+  date-format: "[day]. [month repr:long] [year]",
+  submission-date: none,
   project-logo: none,
   project-logo-dimensions: (auto, auto),
-  titlepage-logo: none,
-  titlepage-logo-dimensions: (auto, auto),
+  titlepage-logo: image("assets/HM_Logo_RGB.png", width: 40%),
   chapter-heading-pagebreak: true,
+  supervisor: none,
+  faculty: "Faculty of Computer Science and Mathematics",
+  study-course: "Computer Science",
+  type-of-degree: "Master of Science",
+  student-id: none,
+  show-thesis-title-page: false,
   lastpage: none,
-  text-size: 12pt,
+  text-size: 12pt, //textsize for non header & footer text
+  list-of-tables: true,
+  list-of-figures: true,
+  list-of-code: false,
+  declaration-of-authorship: false,
+  declaration-of-authorship-signature-img-path: none,
   front-numbering: "i",
   main-numbering: "1 / 1",
-  back-numbering: "i",
+  back-numbering: "a / a",
   appendix-numbering: "a / a",
   body,
 ) = {
@@ -58,7 +73,7 @@
   let heading-font = font
 
   let text-size-template = 10pt
-  set text(font: body-font, lang: language, text-size-template)
+  set text(font: body-font, lang: language, text-size-template) //template text
   set par(justify: true)
   show heading: set text(weight: "semibold", font: heading-font, fill: black)
 
@@ -66,14 +81,22 @@
     margin: (
       top: 6em,
       bottom: 6em,
-      rest: 6em,
+      rest: 6em, // Side margins
     ),
   )
 
   // Common Stuff
   let front_end_page = state("front_end_page", 0)
 
-  let current-h1 = state("current-h1", top-remark)
+  let toc-title = linguify("base_table_of_contents", from: lang-db)
+  let current-h1 = state(
+    "current-h1",
+    if toc-depth != none {
+      toc-title
+    } else {
+      top-remark
+    },
+  )
 
   let hm-header = context {
     set text(text-size-template)
@@ -103,7 +126,7 @@
   )
   show table.cell.where(y: 0): strong
 
-  let footer(display, end-label, show-accent: true) = context {
+  let footer(display, end-label, show-total: true, show-accent: true) = context {
     set text(text-size-template)
 
     if show-accent {
@@ -122,7 +145,11 @@
         #context {
           let p = counter(page).get()
           let l = counter(page).at(end-label)
-          numbering(display, ..p, ..l)
+          if show-total {
+            numbering(display, ..p, ..l)
+          } else {
+            numbering(display, ..p)
+          }
         }
       ],
     )
@@ -135,9 +162,17 @@
     subtitle: subtitle,
     authors: authors,
     logo: titlepage-logo,
-    logo-dimensions: titlepage-logo-dimensions,
     text-size: text-size-template,
     date: date,
+    doc-type: doc-type,
+    student-id: student-id,
+    study-course: study-course,
+    submission-date: submission-date,
+    supervisor: supervisor,
+    type-of-degree: type-of-degree,
+    date-format: date-format,
+    faculty: faculty,
+    show-thesis-title-page: show-thesis-title-page,
   )
 
   // ------------- Setup Front Matter Lettering --------------
@@ -145,7 +180,7 @@
   set page(
     numbering: front-numbering,
     header: hm-header,
-    footer: footer(front-numbering, <end_front>),
+    footer: footer(front-numbering, <end_front>, show-total: false),
   )
 
   counter(page).update(1)
@@ -157,7 +192,15 @@
   if toc-depth != none {
     {
       show heading.where(level: 1): it => {
-        v(5em)
+        current-h1.update([
+          #if it.numbering != none {
+            [
+              #counter(heading).display(it.numbering)
+            ]
+          }
+          #it.body
+        ])
+
         text(size: 20pt, it)
         v(1.25em)
       }
@@ -168,7 +211,7 @@
         strong(it)
       }
 
-      outline(indent: auto, depth: toc-depth)
+      outline(title: toc-title, indent: auto, depth: toc-depth)
     }
   }
 
@@ -198,18 +241,72 @@
   set text(text-size)
 
   // --------- Space for Glossary Abstract etc ----------
-  heading(level: 1)[List of Figures]
 
-  outline(
-    title: none,
-    target: figure.where(kind: image),
-  )
+  if (declaration-of-authorship) {
+    make-declaration-of-authorship(
+      authors,
+      doc-type,
+      title,
+      date,
+      language,
+      city,
+      date-format,
+      declaration-of-authorship-signature-img-path,
+    )
+  }
 
-  heading(level: 1)[List of Tables]
-  outline(
-    title: none,
-    target: figure.where(kind: table),
-  )
+  if (acknowledgements != none) {
+    context {
+    set par(justify: true, leading: 1em)
+    set block(spacing: 2em)
+
+    align(
+      center + horizon,
+      heading(level: 1, numbering: none)[
+        #linguify("base_acknowledgements", from: lang-db)
+      ])
+      text(acknowledgements)
+    }
+  }
+
+  if (abstract != none) {
+    context {
+    set par(justify: true, leading: 1em)
+    set block(spacing: 2em)
+
+    align(
+      center + horizon,
+      heading(level: 1, numbering: none)[
+        #linguify("base_abstract", from: lang-db)
+      ])
+      text(abstract)
+    }
+  }
+
+  if (list-of-tables) {
+    heading(level: 1, linguify("base_list_of_tables", from: lang-db))
+    outline(
+      title: none,
+      target: figure.where(kind: table),
+    )
+  }
+
+  if (list-of-figures) {
+    heading(level: 1, linguify("base_list_of_figures", from: lang-db))
+    outline(
+      title: none,
+      target: figure.where(kind: image),
+    )
+  }
+
+  if (list-of-code) {
+    heading(level: 1, linguify("base_list_of_code", from: lang-db))
+    outline(
+      title: none,
+      target: figure.where(kind: raw),
+    )
+
+  }
 
   // Display glossary.
   if glossary != none {
@@ -255,7 +352,7 @@
   // Non numbered headings
   set heading(numbering: none)
 
-  // Roman Lettering again
+  // Lettered back matter.
   [#metadata(none)<end_body>]
 
   show heading.where(level: 1): it => {
@@ -269,10 +366,7 @@
     footer: footer(back-numbering, <end_back>),
   )
 
-  // Continue roman count from the last front-matter page:
-  context {
-    counter(page).update(counter(page).at(<end_front>).first() + 1)
-  }
+  counter(page).update(1)
 
   // Display bibliography.
   if bibliography != none {
@@ -284,12 +378,11 @@
     bibliography
   }
 
-  // reset page numbering for appendix
+  // Continue the back-matter page counter for the appendix.
   set page(
     numbering: appendix-numbering,
     footer: footer(appendix-numbering, <end_back>),
   )
-  counter(page).update(1)
 
   // Display appendix.
   if appendix != none {

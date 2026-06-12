@@ -17,3 +17,4 @@
 #import "libs/requirements.typ": *
 #import "libs/utils.typ": *
 #import "libs/risk.typ": *
+#import "libs/declaration-of-authorship.typ": *
