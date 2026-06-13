@@ -92,9 +92,9 @@ This template exports the `hm-template` function with the following named argume
 
 `bib-style (str)`: Bibliography style, default is `"ieee"`.
 
-`appendix (content)`: Content of the appendix section. It is recommended to pass a variable or function that returns the appendix content.
+`appendix(content)`: Content of the appendix section. It is recommended to pass `include "appendix.typ"`. It is expected for the file to contain a level 1 heading such as `= Appendix`.
 
-`lastpage (content)`: Optional custom last page, for example an imprint, declaration of authorship or additional legal text.
+`lastpage(content)`: Optional custom last page, for example an imprint, declaration of authorship or additional legal text. It is recommended to pass `include "lastpage.typ"`.
 
 **Tables of contents and lists**
 

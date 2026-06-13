@@ -387,7 +387,6 @@
       pagebreak()
     }
 
-    heading(level: 1, linguify("base_appendix", from: lang-db))
     appendix
   }
 
