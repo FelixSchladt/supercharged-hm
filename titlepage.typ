@@ -22,6 +22,7 @@
   doc-type: none,
   date-format: none,
   show-thesis-title-page: false,
+  pagebreak-after: true,
 ) = {
   if (not show-thesis-title-page) {
     v(30pt)
@@ -40,6 +41,10 @@
       #v(30pt)
     ]
   } else {
+    if submission-date == none {
+      panic("Thesis title page requires submission-date to be set")
+    }
+
     context {
       set align(center)
       text(
@@ -111,5 +116,7 @@
     }
   }
 
-  pagebreak()
+  if pagebreak-after {
+    pagebreak()
+  }
 }

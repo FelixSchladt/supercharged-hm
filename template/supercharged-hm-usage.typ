@@ -1,6 +1,6 @@
 // Copyright 2024 Felix Schladt https://github.com/FelixSchladt
 
-#import "@preview/supercharged-hm:0.1.2": *
+#import "@preview/supercharged-hm:1.0.0": *
 
 = Template Usage
 Small guide on the usage of the template and provided items.
@@ -23,14 +23,14 @@ For this, the `code` function is used. The `code` function is a wrapper for the 
 )[
   #code(
     ```py
-    def exmple_function(int a, int b) -> int:
+    def example_function(a: int, b: int) -> int:
         print("Hello, World!")
-        yield a + b
+        return a + b
     ```,
   )
 ]
 
-For inline colored code, the \`\`\`py CODE \`\`\` syntax is used like ```py function(int a) -> int```. 
+For inline colored code, the \`\`\`py CODE \`\`\` syntax is used like ```py function(a: int) -> int```.
 
 === Displaying Inline Colored Monospace text
 
@@ -39,7 +39,7 @@ The following text is created with ```typ #rgb-raw("MACHINE_ADAPTER", rgb("#13A2
 
 == Notes
 
-The family of note functions can be used to display note boxed: `note`, `color_note`, `warning-note`, and `good-note`.
+The family of note functions can be used to display note boxes: `note`, `color-note`, `warning-note`, and `good-note`.
 
 #stack(
   dir: ltr,
@@ -111,7 +111,7 @@ For tables, a prestyled wrapper function is available, the `styledtable` functio
 
 == Requirements
 
-Requirements werden in funktional und nicht funktional gruppiert.
+Requirements are grouped into functional and nonfunctional requirements.
 
 #figure(
   caption: "Requirements function usage example"
@@ -125,6 +125,7 @@ Requirements werden in funktional und nicht funktional gruppiert.
     (
       title: [Drone Connectivity], 
       description: [The drone shall have connectivity to the server],
+      traceability: [Linked to connectivity design decisions.],
       subrequirements: (
         (
           title: [LTE Connectivity],
@@ -153,6 +154,7 @@ Below, the rendering of the above shown example is visible.
     (
       title: [Drone Connectivity], 
       description: [The drone shall have connectivity to the server],
+      traceability: [Linked to connectivity design decisions.],
       subrequirements: (
         (
           title: [LTE Connectivity],

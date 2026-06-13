@@ -2,7 +2,7 @@
 
 Unofficial [Typst](https://typst.app/) template for students of Hochschule München (HM).
 
-To see a minimal example of how you can use this template, check out the `main.typ` file.  
+To see a minimal example of how you can use this template, check out the `main.typ` file.
 
 ## Contributing
 
@@ -20,12 +20,12 @@ Once the template is published to Typst Universe you can start a new project dir
 
 1. Open the Typst web app.
 2. Click “Start from template”.
-3. Search for `hm-template` (or the final published name of this template).
+3. Search for `supercharged-hm`.
 
 Using the CLI you will be able to initialize a new project with:
 
 ```shell
-typst init @preview/hm-template
+typst init @preview/supercharged-hm
 ```
 
 Typst will create a new directory with all the files needed to get you started.
@@ -70,15 +70,19 @@ This template exports the `hm-template` function with the following named argume
 
 `top-remark (content)`: Small remark printed at the top of the title page, for example a confidentiality note or internal document number.
 
-`show-table-of-contents (bool)`: Whether the table of contents should be shown, default is `true`.
+`toc-pagebreak (bool)`: Whether the table of contents starts on a new page after the title page, default is `false`.
 
-`toc-depth (int)`: Depth of the table of contents, default is `2`.
+`toc-depth (int | none)`: Depth of the table of contents, default is `2`. Set to `none` to disable the table of contents.
 
 `appendix (content)`: Content of the appendix section. It is recommended to pass a variable or function that returns the appendix content.
 
 `language (str)`: Language of the document, for example `"de"` or `"en"`, default is `"de"`.
 
-`glossary (dictionary)`: Glossary and acronym definitions used by the `gls` and `glspl` helpers (see section “Glossary and Acronyms”).
+`glossary (array)`: Glossary and acronym definitions used by the `gls` and `glspl` helpers (see section “Glossary and Acronyms”).
+
+`abstract (content)`: Optional abstract page content.
+
+`acknowledgements (content)`: Optional acknowledgements page content.
 
 `bibliography (content)`: Bibliography function, for example `bibliography("references.bib")`.
 
@@ -90,19 +94,53 @@ This template exports the `hm-template` function with the following named argume
 
 `authors (content | str)`: Author or list of authors. This can be a simple string or a more complex piece of content if you want custom formatting.
 
+`city (str | none)`: City printed in the declaration of authorship. Required when `declaration-of-authorship` is `true`.
+
 `date (datetime)`: Date printed on the title page, default is `datetime.today()`.
 
-`project-logo (content)`: Logo used inside the main document, for example in headers. Typical usage: `image("img/project-logo.pdf")`.
+`date-format (str)`: Format string used for dates printed by the template, default is `"[day]. [month repr:long] [year]"`.
 
-`project-logo-dimensions (array)`: Two element array `(width, height)` for the project logo, default is `(auto, auto)`.
+`submission-date (datetime | none)`: Submission date printed on the thesis title page. Required when `show-thesis-title-page` is `true`.
 
-`titlepage-logo (content)`: Logo for the title page. Typical usage: `image("img/university-logo.pdf")`.
+`project-logo (content)`: Logo used inside the main document header. Typical usage: `image("img/project-logo.pdf", height: 20pt)`.
 
-`titlepage-logo-dimensions (array)`: Two element array `(width, height)` for the title page logo, default is `(auto, auto)`.
+`titlepage-logo (content)`: Logo for the title page. Typical usage: `image("img/university-logo.pdf", width: 40%)`.
+
+`chapter-heading-pagebreak (bool)`: Whether level 1 headings start on a new page, default is `true`.
+
+`supervisor (content | none)`: Supervisor printed on the thesis title page.
+
+`faculty (content | str)`: Faculty printed on the thesis title page, default is `"Faculty of Computer Science and Mathematics"`.
+
+`study-course (content | str)`: Study course printed on the thesis title page, default is `"Computer Science"`.
+
+`type-of-degree (content | str)`: Degree printed on the thesis title page, default is `"Master of Science"`.
+
+`student-id (content | str | none)`: Student ID printed on the thesis title page.
+
+`show-thesis-title-page (bool)`: Whether to use the thesis title page layout, default is `false`.
 
 `lastpage (content)`: Optional custom last page, for example an imprint, declaration of authorship or additional legal text.
 
 `text-size (length)`: Base text size for body text (not headers or footers), default is `12pt`.
+
+`list-of-tables (bool)`: Whether to show a list of tables, default is `true`.
+
+`list-of-figures (bool)`: Whether to show a list of figures, default is `true`.
+
+`list-of-code (bool)`: Whether to show a list of code snippets, default is `false`.
+
+`declaration-of-authorship (bool)`: Whether to render the declaration of authorship before the abstract/front matter, default is `false`.
+
+`declaration-of-authorship-signature-img-path (content | none)`: Optional signature image content for the declaration of authorship.
+
+`front-numbering (str | none)`: Page numbering pattern for the front matter, default is `"i"`.
+
+`main-numbering (str | none)`: Page numbering pattern for the main matter, default is `"1 / 1"`.
+
+`back-numbering (str | none)`: Page numbering pattern for the back matter, default is `"a / a"`.
+
+`appendix-numbering (str | none)`: Page numbering pattern for the appendix, default is `"a / a"`.
 
 `body (content*)`: Main content of the document. This is where your chapters go and is required.
 
@@ -120,6 +158,43 @@ In most cases a thesis or report will at least provide:
 - `bibliography`
 - `glossary`
 - `body`
+
+## Thesis Title Page and Declarations
+
+For thesis documents, enable the thesis title page layout and provide the required thesis metadata:
+
+```typst
+#show: hm-template.with(
+  title: [My Thesis Title],
+  doc-type: [Masterarbeit],
+  authors: authors("Max Mustermann"),
+  show-thesis-title-page: true,
+  toc-pagebreak: true,
+  submission-date: datetime(year: 2026, month: 6, day: 13),
+  supervisor: [Prof. Dr. Erika Muster],
+  student-id: "12345678",
+  faculty: [Faculty of Computer Science and Mathematics],
+  study-course: [Computer Science],
+  type-of-degree: [Master of Science],
+)
+```
+
+You can add front matter and the declaration of authorship with:
+
+```typst
+#show: hm-template.with(
+  abstract: [
+    This thesis investigates ...
+  ],
+  acknowledgements: [
+    I would like to thank ...
+  ],
+  declaration-of-authorship: true,
+  city: "Munich",
+)
+```
+
+When `declaration-of-authorship` is enabled, `title`, `doc-type`, and `city` must be set.
 
 ## Glossary and Acronyms (Glossarium)
 
@@ -151,18 +226,20 @@ A typical structure looks like this:
 
 ```typst
 #let glossary = (
-  "http": (
+  (
+    key: "http",
     short: "HTTP",
     long: "Hypertext Transfer Protocol",
   ),
-  "api": (
+  (
+    key: "api",
     short: "API",
     long: "Application Programming Interface",
   ),
 )
 ```
 
-Then pass the dictionary when calling the template:
+Then pass the glossary array when calling the template:
 
 ```typst
 #show: hm-template(
@@ -207,28 +284,6 @@ If you want monospaced text in a specific color, use `rgb-raw`:
 ```
 
 This renders the identifier `MACHINE_ADAPTER` in monospace with the given RGB color.
-
-## Code
-
-This template uses [codelst](https://typst.app/universe/package/codelst) to syntax highlighted code blocks.
-
-Code snippets are inserted through a small wrapper function `code`, which forwards to `sourcecode` from `codelst` with template specific defaults.
-
-Example:
-
-```typst
-#figure(
-  caption: "Example code.",
-)[
-  #code(
-    ```py
-    def example_function(a: int, b: int) -> int:
-        print("Hello, World!")
-        return a + b
-    ```
-  )
-]
-```
 
 ## Notes
 
@@ -306,7 +361,7 @@ to adjust the look for your document.
 
 ## Requirements
 
-The `requirements` helper renders grouped functional and non functional requirements in a consistent layout.
+The `requirements` helper renders grouped functional and nonfunctional requirements in a consistent layout.
 
 ### Usage
 
@@ -320,6 +375,7 @@ The `requirements` helper renders grouped functional and non functional requirem
     (
       title: [Drone Connectivity],
       description: [The drone shall have connectivity to the server.],
+      traceability: [Linked to connectivity design decisions.],
       subrequirements: (
         (
           title: [LTE Connectivity],
@@ -337,11 +393,14 @@ The `requirements` helper renders grouped functional and non functional requirem
   nonfunctional: (
     (
       title: [Server Placement],
-      description: [The drone server shall be placed in a remote data center.]
+      description: [The drone server shall be placed in a remote data center.],
+      authors: ("Max Mustermann",),
     ),
   ),
 )
 ```
+
+Each requirement can include optional `traceability`, `authors`, and `subrequirements` fields.
 
 Below the rendered block, each requirement is assigned an identifier based on its title. You can reference them from the text like this:
 

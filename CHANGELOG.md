@@ -1,9 +1,17 @@
 # Supercharged-HM Changelog
 
-## [IN DEVELOPMENT]
+## [v1.0.0] - 2026-06-13
 
-- add `toc-pagebreak` option to show the table of contents on the next page instead of the title page (default `false`).
-- add `chapter-heading-pagebreak` option to disable the pagebreak before level 1 headings (default `true`).
+- Breaking: removed `show-table-of-contents`; use `toc-depth: none`.
+- Breaking: renamed requirement metadata `tracebility` to `traceability`.
+- Breaking: renamed `req_funcional` to `req_functional`.
+- Breaking: removed `titlepage-logo-dimensions` and `project-logo-dimensions`; pass sized logo content instead.
+- Add thesis title page, thesis metadata, declaration of authorship, abstract, and acknowledgements support.
+- Add configurable page numbering and lists of tables, figures, and code snippets.
+- Add `toc-pagebreak`, `chapter-heading-pagebreak`, and header `project-logo` support.
+- Track the current heading in page headers.
+- Update README and examples for v1.0.0.
+- Fix German list-of-figures localization, requirement author rendering, package naming, and stale imports.
 
 ## [v0.1.2] - 2026-01-18
 

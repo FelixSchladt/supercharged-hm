@@ -1,4 +1,4 @@
-#import "@preview/supercharged-hm:0.1.2": *
+#import "@preview/supercharged-hm:1.0.0": *
 #import "glossary.typ" : glossary
 
 #show: hm-template.with(
@@ -19,7 +19,7 @@
 
 
 // Remove after reading
-#include "example_usage.typ"
+#include "supercharged-hm-usage.typ"
 
 = Introduction
 

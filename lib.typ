@@ -11,7 +11,6 @@
   subtitle: none,
   doc-type: none,
   top-remark: none,
-  show-table-of-contents: true,
   toc-pagebreak: false,
   toc-depth: 2,
   appendix: none,
@@ -29,7 +28,6 @@
   date-format: "[day]. [month repr:long] [year]",
   submission-date: none,
   project-logo: none,
-  project-logo-dimensions: (auto, auto),
   titlepage-logo: image("assets/HM_Logo_RGB.png", width: 40%),
   chapter-heading-pagebreak: true,
   supervisor: none,
@@ -86,8 +84,6 @@
   )
 
   // Common Stuff
-  let front_end_page = state("front_end_page", 0)
-
   let toc-title = linguify("base_table_of_contents", from: lang-db)
   let current-h1 = state(
     "current-h1",
@@ -105,9 +101,9 @@
       columns: (40%, 20%, 40%),
       align(left)[#doc-type],
       align(center)[
-        // #set align(bottom)
-        // #set image(height: 25pt)
-        // #image("assets/HM_Logo_RGB.png")
+        #if project-logo != none {
+          project-logo
+        }
       ],
       align(right)[
         #text(style: "italic")[
@@ -173,6 +169,7 @@
     date-format: date-format,
     faculty: faculty,
     show-thesis-title-page: show-thesis-title-page,
+    pagebreak-after: show-thesis-title-page or toc-pagebreak or toc-depth == none,
   )
 
   // ------------- Setup Front Matter Lettering --------------
