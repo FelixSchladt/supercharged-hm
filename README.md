@@ -46,11 +46,11 @@ A minimal `main.typ` could look like this:
 #show: hm-template(
   title: [My Thesis Title],
   subtitle: [Optional Subtitle],
-  doc-type: [Masterarbeit],
   authors: "Max Mustermann",
+  doc-type: [Masterarbeit],
   language: "de",
-  bibliography: bibliography("references.bib"),
   glossary: glossary,
+  bibliography: bibliography("references.bib"),
   body: [
     = Introduction
 
@@ -62,51 +62,67 @@ A minimal `main.typ` could look like this:
 
 This template exports the `hm-template` function with the following named arguments:
 
+**Basic document settings**
+
 `title (content)`: Title of the document shown on the title page.
 
 `subtitle (content)`: Optional subtitle printed below the title.
 
+`authors (content | str)`: Author or list of authors. This can be a simple string or a more complex piece of content if you want custom formatting.
+
 `doc-type (content)`: Type of the document, for example `Bachelorarbeit`, `Masterarbeit` or `Projektarbeit`.
-
-`top-remark (content)`: Small remark printed at the top of the title page, for example a confidentiality note or internal document number.
-
-`toc-pagebreak (bool)`: Whether the table of contents starts on a new page after the title page, default is `false`.
-
-`toc-depth (int | none)`: Depth of the table of contents, default is `2`. Set to `none` to disable the table of contents.
-
-`appendix (content)`: Content of the appendix section. It is recommended to pass a variable or function that returns the appendix content.
 
 `language (str)`: Language of the document, for example `"de"` or `"en"`, default is `"de"`.
 
-`glossary (array)`: Glossary and acronym definitions used by the `gls` and `glspl` helpers (see section “Glossary and Acronyms”).
+`font (str)`: Main text font, default is `"Roboto"`.
+
+`text-size (length)`: Base text size for body text (not headers or footers), default is `12pt`.
+
+`version (str)`: Version string of the document or template, printed where appropriate, default is `"0.1"`.
+
+**Front matter and references**
 
 `abstract (content)`: Optional abstract page content.
 
 `acknowledgements (content)`: Optional acknowledgements page content.
 
+`glossary (array)`: Glossary and acronym definitions used by the `gls` and `glspl` helpers (see section “Glossary and Acronyms”).
+
 `bibliography (content)`: Bibliography function, for example `bibliography("references.bib")`.
 
 `bib-style (str)`: Bibliography style, default is `"ieee"`.
 
-`font (str)`: Main text font, default is `"Roboto"`.
+`appendix (content)`: Content of the appendix section. It is recommended to pass a variable or function that returns the appendix content.
 
-`version (str)`: Version string of the document or template, printed where appropriate, default is `"0.1"`.
+`lastpage (content)`: Optional custom last page, for example an imprint, declaration of authorship or additional legal text.
 
-`authors (content | str)`: Author or list of authors. This can be a simple string or a more complex piece of content if you want custom formatting.
+**Tables of contents and lists**
 
-`city (str | none)`: City printed in the declaration of authorship. Required when `declaration-of-authorship` is `true`.
+`toc-depth (int | none)`: Depth of the table of contents, default is `2`. Set to `none` to disable the table of contents.
 
-`date (datetime)`: Date printed on the title page, default is `datetime.today()`.
+`toc-pagebreak (bool)`: Whether the table of contents starts on a new page after the title page, default is `false`.
 
-`date-format (str)`: Format string used for dates printed by the template, default is `"[day]. [month repr:long] [year]"`.
+`list-of-tables (bool)`: Whether to show a list of tables, default is `true`.
 
-`submission-date (datetime | none)`: Submission date printed on the thesis title page. Required when `show-thesis-title-page` is `true`.
+`list-of-figures (bool)`: Whether to show a list of figures, default is `true`.
 
-`project-logo (content)`: Logo used inside the main document header. Typical usage: `image("img/project-logo.pdf", height: 20pt)`.
+`list-of-code (bool)`: Whether to show a list of code snippets, default is `false`.
+
+**Logos and layout**
 
 `titlepage-logo (content)`: Logo for the title page. Typical usage: `image("img/university-logo.pdf", width: 40%)`.
 
+`project-logo (content)`: Logo used inside the main document header. Typical usage: `image("img/project-logo.pdf", height: 20pt)`.
+
 `chapter-heading-pagebreak (bool)`: Whether level 1 headings start on a new page, default is `true`.
+
+**Thesis title page and declaration**
+
+`show-thesis-title-page (bool)`: Whether to use the thesis title page layout, default is `false`.
+
+`student-id (content | str | none)`: Student ID printed on the thesis title page.
+
+`submission-date (datetime | none)`: Submission date printed on the thesis title page. Required when `show-thesis-title-page` is `true`.
 
 `supervisor (content | none)`: Supervisor printed on the thesis title page.
 
@@ -116,23 +132,19 @@ This template exports the `hm-template` function with the following named argume
 
 `type-of-degree (content | str)`: Degree printed on the thesis title page, default is `"Master of Science"`.
 
-`student-id (content | str | none)`: Student ID printed on the thesis title page.
-
-`show-thesis-title-page (bool)`: Whether to use the thesis title page layout, default is `false`.
-
-`lastpage (content)`: Optional custom last page, for example an imprint, declaration of authorship or additional legal text.
-
-`text-size (length)`: Base text size for body text (not headers or footers), default is `12pt`.
-
-`list-of-tables (bool)`: Whether to show a list of tables, default is `true`.
-
-`list-of-figures (bool)`: Whether to show a list of figures, default is `true`.
-
-`list-of-code (bool)`: Whether to show a list of code snippets, default is `false`.
+`city (str | none)`: City printed in the declaration of authorship. Required when `declaration-of-authorship` is `true`.
 
 `declaration-of-authorship (bool)`: Whether to render the declaration of authorship before the abstract/front matter, default is `false`.
 
-`declaration-of-authorship-signature-img-path (content | none)`: Optional signature image content for the declaration of authorship.
+`declaration-of-authorship-signature-img (content | none)`: Optional signature image content for the declaration of authorship.
+
+**Numbering and advanced settings**
+
+`top-remark (content)`: Small remark printed at the top of the title page, for example a confidentiality note or internal document number.
+
+`date (datetime)`: Date printed on the title page, default is `datetime.today()`.
+
+`date-format (str)`: Format string used for dates printed by the template, default is `"[day]. [month repr:long] [year]"`.
 
 `front-numbering (str | none)`: Page numbering pattern for the front matter, default is `"i"`.
 
@@ -152,8 +164,8 @@ Arguments marked with `*` are required for a useful document.
 In most cases a thesis or report will at least provide:
 
 - `title`
-- `doc-type`
 - `authors`
+- `doc-type`
 - `language`
 - `bibliography`
 - `glossary`
@@ -166,16 +178,16 @@ For thesis documents, enable the thesis title page layout and provide the requir
 ```typst
 #show: hm-template.with(
   title: [My Thesis Title],
-  doc-type: [Masterarbeit],
   authors: authors("Max Mustermann"),
+  doc-type: [Masterarbeit],
   show-thesis-title-page: true,
-  toc-pagebreak: true,
+  student-id: "12345678",
   submission-date: datetime(year: 2026, month: 6, day: 13),
   supervisor: [Prof. Dr. Erika Muster],
-  student-id: "12345678",
   faculty: [Faculty of Computer Science and Mathematics],
   study-course: [Computer Science],
   type-of-degree: [Master of Science],
+  toc-pagebreak: true,
 )
 ```
 
