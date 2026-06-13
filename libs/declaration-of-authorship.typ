@@ -6,7 +6,7 @@
 
 #import "../lang.typ": *
 
-#import "stringify.typ": *
+#import "date.typ": format-date
 
 #let make-declaration-of-authorship(
   authors,
@@ -60,14 +60,8 @@
     linguify("lib_declaration_of_authorship-body-1", from: lang-db),
   )
 
-  let end-date = if (type(date) == datetime) {
-    date
-  } else {
-    date.at(1)
-  }
-
   v(2em)
-  text([#city, #end-date.display(date-format)])
+  text([#city, #format-date(date, language, date-format)])
   if (signature-img != none) {
     place(
       dx: 40pt,

@@ -122,7 +122,7 @@ This template exports the `hm-template` function with the following named argume
 
 `student-id (content | str | none)`: Student ID printed on the thesis title page.
 
-`submission-date (datetime | none)`: Submission date printed on the thesis title page. Required when `show-thesis-title-page` is `true`.
+`submission-date (datetime | none)`: Submission date printed on the thesis title page. Required when `show-thesis-title-page` is `true`. It uses the same rendering rules as `date-format`.
 
 `supervisor (content | none)`: Supervisor printed on the thesis title page.
 
@@ -144,7 +144,7 @@ This template exports the `hm-template` function with the following named argume
 
 `date (datetime)`: Date printed on the title page, default is `datetime.today()`.
 
-`date-format (str)`: Format string used for dates printed by the template, default is `"[day]. [month repr:long] [year]"`.
+`date-format (auto | str | function)`: Format used for dates printed by the template, default is `auto`. With `auto`, German dates render as `13. Juni 2026` and English dates as `13 June 2026`. A string is passed to Typst's native `datetime.display` method. A function is called as `date-format(date, language)` and may return custom content.
 
 `front-numbering (str | none)`: Page numbering pattern for the front matter, default is `"i"`.
 

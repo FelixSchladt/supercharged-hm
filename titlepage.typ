@@ -5,6 +5,7 @@
 
 #import "colors.typ": *
 #import "lang.typ": *
+#import "libs/date.typ": format-date
 
 #let titlepage(
   title: "Title",
@@ -13,6 +14,7 @@
   text-size: 12pt,
   date: datetime.today(),
   submission-date: none,
+  language: "de",
   logo: none,
   supervisor: none,
   type-of-degree: none,
@@ -20,7 +22,7 @@
   faculty: none,
   study-course: none,
   doc-type: none,
-  date-format: none,
+  date-format: auto,
   show-thesis-title-page: false,
   pagebreak-after: true,
 ) = {
@@ -37,7 +39,7 @@
       #v(0pt)
       #text(authors, size: 15pt)
       #v(0pt)
-      #text(date.display(date-format), size: 15pt)
+      #text(format-date(date, language, date-format), size: 15pt)
       #v(30pt)
     ]
   } else {
@@ -110,7 +112,7 @@
         table.header([],[]),
         linguify("base_title_page_thesis-author", from: lang-db), authors,
         linguify("base_title_page_thesis-student-id", from: lang-db), student-id,
-        linguify("base_title_page_thesis-submission-date", from: lang-db), submission-date.display(date-format),
+        linguify("base_title_page_thesis-submission-date", from: lang-db), format-date(submission-date, language, date-format),
         linguify("base_title_page_thesis-supervisor", from: lang-db), supervisor,
       )
     }
