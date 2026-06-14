@@ -70,10 +70,12 @@
     content,
     width: width,
     stroke: border,
-    fill: inner, 
+    fill: inner,
   )
 }
 
 #let todo() = {
   warning-note([*TODO*])
 }
+
+#let source = text(weight: "bold", fill: red, "SOURCE")

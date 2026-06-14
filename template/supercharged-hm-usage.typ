@@ -173,5 +173,5 @@ Below, the rendering of the above shown example is visible.
 )
 
 #set align(bottom)
-Each requirement can be referred to by its requirement id like ```typ @req_Drone_Connectivity```, @req_Drone_Connectivity.
+Each requirement can be referred to by its requirement id like ```typ @req_drone_connectivity```, @req_drone_connectivity.
 Additional labels exist for ```typ @req_functional``` and ```typ @req_nonfunctional```.

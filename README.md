@@ -156,9 +156,11 @@ This template exports the `hm-template` function with the following named argume
 
 `appendix-numbering (str | none)`: Page numbering pattern for the appendix, default is `"a / a"`.
 
+`text-size-template (length | text.size)`: Text size of the template (its highly advised to keep default)
+
 `body (content*)`: Main content of the document. This is where your chapters go and is required.
 
-Behind the arguments the type of the value is given in parentheses.  
+Behind the arguments the type of the value is given in parentheses.
 Arguments marked with `*` are required for a useful document.
 
 ---

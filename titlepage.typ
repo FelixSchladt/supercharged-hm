@@ -11,7 +11,6 @@
   title: "Title",
   subtitle: "Subtitle",
   authors: "Authors",
-  text-size: 12pt,
   date: datetime.today(),
   submission-date: none,
   language: "de",

@@ -2,7 +2,6 @@
 // Copyright 2025 Felix Schladt https://github.com/FelixSchladt
 
 #import "@preview/linguify:0.5.0": *
-#import "@preview/oxifmt:1.0.0": strfmt
 
 #import "../lang.typ": *
 

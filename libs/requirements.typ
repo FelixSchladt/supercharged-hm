@@ -1,7 +1,5 @@
 // Copyright 2024 Felix Schladt https://github.com/FelixSchladt
 
-#import "@preview/drafting:0.2.2": *
-#import "@preview/glossarium:0.5.10": *
 #import "@preview/linguify:0.5.0": *
 
 #import "utils.typ": *
@@ -15,28 +13,39 @@
 
 #let label-registry = state("label-reg", ())
 
+#let _req_label_normalize(title) = {
+  let name = lower(plain-text(title))
+
+  name = name.replace("ä", "ae")
+  name = name.replace("ö", "oe")
+  name = name.replace("ü", "ue")
+  name = name.replace("ß", "ss")
+  name = name.replace(regex("[^a-z0-9]+"), "_")
+  name = name.trim("_")
+
+  if name == "" {
+    "req"
+  } else {
+    "req_" + name
+  }
+}
+
 #let _add_req_label(title) = {
   context {
-    let name = "req_" + plain-text(title).replace(" ", "_")
-  
-    let dup = false
-    
-      let labels = label-registry.get()
-      while name in labels {
-        if dup {
-          name = name.trim("_" + name.last(), at: end, repeat: false) + "_" + str(int(name.last()) + 1)
-          continue
-        }
-        name = name + "_1"
-        dup = true
+    let base-name = _req_label_normalize(title)
+    let name = base-name
+    let labels = label-registry.get()
+
+    let i = 1
+    while name in labels {
+      name = base-name + "_" + str(i)
+      i += 1
     }
-  
-    label-registry.update(
-      label-reg => {
-        label-reg.push(name.replace(" ", "_"))
-        label-reg
-      } 
-    )
+
+    label-registry.update(label-reg => {
+      label-reg.push(name)
+      label-reg
+    })
   }
 }
 
@@ -63,37 +72,35 @@
   functional-chapter-description: str,
   functional:    (
     (
-      title: str, 
-      description: str, 
-      authors: (), 
+      title: str,
+      description: str,
+      authors: (),
       traceability: str,
       subrequirements: ()
     ),
-  ), 
+  ),
   non-functional-chapter-description: str,
   nonfunctional: (
     (
-      title: str, 
-      description: str, 
-      authors: (), 
+      title: str,
+      description: str,
+      authors: (),
       traceability: str,
       subrequirements: ()
     ),
   )
 ) = {
   let requirement(
-    title, 
-    description, 
-    functional, 
+    title,
+    description,
     traceability: str,
-    authors: (), 
+    authors: (),
     subrequirements: ()
   ) = (
     title: title,
     authors: authors,
     description: description,
     traceability: traceability,
-    functional: functional,
     subrequirements: subrequirements
   )
 
@@ -120,15 +127,15 @@
           block(it.body)
         }
         #set par(justify: false)
-        #heading(level:4, supplement: none, "[" + numbering + "] " + req.title)
+        #heading(level:4, supplement: none, [\[#numbering\] #req.title])
         #label(_get_latest_req_label())
       ]
-      
+
       // Show authors if provided
       if req.authors.len() > 0{
         authors(..req.authors)
       }
-      
+
       req.description
 
       linebreak()
@@ -157,14 +164,13 @@
       if "authors" in req {
         authors = req.at("authors")
       }
-      
+
       out_reqs.push(
         requirement(
-          req.at("title"), 
-          req.at("description"), 
+          req.at("title"),
+          req.at("description"),
           traceability: traceability,
-          false, 
-          authors: authors, 
+          authors: authors,
           subrequirements: subreq,
         )
       )
@@ -178,14 +184,14 @@
   let ctr = 0
   for (title, lbl, description, requirements) in (
     (
-      linguify("lib_req_func-req", from: lang-db), 
+      linguify("lib_req_func-req", from: lang-db),
       <req_functional>,
-      functional-chapter-description, 
+      functional-chapter-description,
       freqs
     ), (
-      linguify("lib_req_nonfunc-req", from: lang-db), 
-      <req_nonfunctional>, 
-      non-functional-chapter-description, 
+      linguify("lib_req_nonfunc-req", from: lang-db),
+      <req_nonfunctional>,
+      non-functional-chapter-description,
       nreqs
     )
   ){
@@ -193,7 +199,7 @@
     description
 
     display_reqs(requirements, ctr, nreqs.len() + freqs.len(), "R")
-    
+
     ctr+= requirements.len()
   }
 }

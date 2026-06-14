@@ -48,6 +48,7 @@
   main-numbering: "1 / 1",
   back-numbering: "a / a",
   appendix-numbering: "a / a",
+  text-size-template: 10pt,
   body,
 ) = {
   // Page Numbering
@@ -71,8 +72,11 @@
   let body-font = font
   let heading-font = font
 
-  let text-size-template = 10pt
-  set text(font: body-font, lang: language, text-size-template) //template text
+  set text(
+    font: body-font,
+    lang: language,
+    size: text-size-template
+  ) //template text
   set par(justify: true)
   show heading: set text(weight: "semibold", font: heading-font, fill: black)
 
@@ -96,7 +100,7 @@
   )
 
   let hm-header = context {
-    set text(text-size-template)
+    set text(size: text-size-template)
 
     grid(
       columns: (40%, 20%, 40%),
@@ -124,7 +128,7 @@
   show table.cell.where(y: 0): strong
 
   let footer(display, end-label, show-total: true, show-accent: true) = context {
-    set text(text-size-template)
+    set text(size: text-size-template)
 
     if show-accent {
       accent_line
@@ -159,7 +163,6 @@
     subtitle: subtitle,
     authors: authors,
     logo: titlepage-logo,
-    text-size: text-size-template,
     date: date,
     language: language,
     doc-type: doc-type,
@@ -237,7 +240,7 @@
   show heading.where(level: 2): it => v(1em) + it + v(1em)
   show heading.where(level: 3): it => v(1em) + it + v(0.75em)
 
-  set text(text-size)
+  set text(size: text-size)
 
   // --------- Space for Glossary Abstract etc ----------
 

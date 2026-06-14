@@ -5,8 +5,6 @@
 #import "../colors.typ": *
 #import "../lang.typ": *
 
-#import "tablestyle.typ": *
-#import "requirements.typ": *
 #import "stringify.typ": *
 
 #let risk(

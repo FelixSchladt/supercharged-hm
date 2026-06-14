@@ -14,6 +14,7 @@
 - Track the current heading in page headers.
 - Update README and examples for v1.0.0.
 - Fix German list-of-figures localization, requirement author rendering, package naming, and stale imports.
+- Improved label normalization of the requirements library.
 
 ## [v0.1.2] - 2026-01-18
 
