@@ -136,6 +136,8 @@ This template exports the `hm-template` function with the following named argume
 
 `declaration-of-authorship (bool)`: Whether to render the declaration of authorship before the abstract/front matter, default is `false`.
 
+`declaration-of-authorship-ai-usage (bool)`: Whether to include the HM template declaration of authorship declaring the usage of AI tools in creating the thesis or the version not including the paragraphs about AI usage. In case AI was used in any stage of creating the thesis, using the AI usage declaration of authorship is highly advised. It is recommended to read the following [document](https://mediapool.hm.edu/media/fk11/fk11_lokal/2023_/downloads___formulare_1/Eigenstaendigkeitserklaerung_fuer_Abschlussarbeiten.pdf) `true`.
+
 `declaration-of-authorship-signature-img (content | none)`: Optional signature image content for the declaration of authorship.
 
 **Numbering and advanced settings**

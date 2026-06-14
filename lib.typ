@@ -39,6 +39,7 @@
   type-of-degree: "Master of Science",
   city: none,
   declaration-of-authorship: false,
+  declaration-of-authorship-ai-usage: true,
   declaration-of-authorship-signature-img: none,
   top-remark: none,
   date: datetime.today(),
@@ -242,9 +243,8 @@
 
   if (declaration-of-authorship) {
     make-declaration-of-authorship(
+      declaration-of-authorship-ai-usage,
       authors,
-      doc-type,
-      title,
       date,
       language,
       city,
