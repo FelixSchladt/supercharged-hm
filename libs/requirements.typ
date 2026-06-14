@@ -66,7 +66,7 @@
       title: str, 
       description: str, 
       authors: (), 
-      tracebility: str, 
+      traceability: str,
       subrequirements: ()
     ),
   ), 
@@ -76,7 +76,7 @@
       title: str, 
       description: str, 
       authors: (), 
-      tracebility: str, 
+      traceability: str,
       subrequirements: ()
     ),
   )
@@ -85,14 +85,14 @@
     title, 
     description, 
     functional, 
-    tracebility: str, 
+    traceability: str,
     authors: (), 
     subrequirements: ()
   ) = (
     title: title,
     authors: authors,
     description: description,
-    tracebility: tracebility,
+    traceability: traceability,
     functional: functional,
     subrequirements: subrequirements
   )
@@ -126,13 +126,13 @@
       
       // Show authors if provided
       if req.authors.len() > 0{
-        authors_list(req.authors)
+        authors(..req.authors)
       }
       
       req.description
 
       linebreak()
-      req.tracebility
+      req.traceability
 
       if req.subrequirements.len() > 0 {
         display_reqs(req.subrequirements, 0, req.subrequirements.len(), numbering + ".")
@@ -148,9 +148,9 @@
         subreq = convert_to_requirements(req.at("subrequirements"))
       }
 
-      let tracebility = ""
-      if "tracebility" in req {
-        tracebility = req.at("tracebility")
+      let traceability = ""
+      if "traceability" in req {
+        traceability = req.at("traceability")
       }
 
       let authors = ()
@@ -158,13 +158,11 @@
         authors = req.at("authors")
       }
       
-      let x = type(req)
-
       out_reqs.push(
         requirement(
           req.at("title"), 
           req.at("description"), 
-          tracebility: tracebility, 
+          traceability: traceability,
           false, 
           authors: authors, 
           subrequirements: subreq,
@@ -181,7 +179,7 @@
   for (title, lbl, description, requirements) in (
     (
       linguify("lib_req_func-req", from: lang-db), 
-      <req_funcional>, 
+      <req_functional>,
       functional-chapter-description, 
       freqs
     ), (
