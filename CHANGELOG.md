@@ -1,5 +1,9 @@
 # Supercharged-HM Changelog
 
+## [UNRELEASED]
+
+- Fixed requirements references showing heading numbering (e.g. 3.2.2.1) instead of requirement id (e.g. R09).
+
 ## [v1.0.0] - 2026-06-13
 
 - Breaking: removed `show-table-of-contents`; use `toc-depth: none`.

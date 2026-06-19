@@ -127,7 +127,12 @@
           block(it.body)
         }
         #set par(justify: false)
-        #heading(level:4, supplement: none, [\[#numbering\] #req.title])
+        #heading(
+          level: 4,
+          supplement: none,
+          numbering: (..nums) => numbering,
+          [\[#numbering\] #req.title],
+        )
         #label(_get_latest_req_label())
       ]
 
