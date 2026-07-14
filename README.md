@@ -88,6 +88,8 @@ This template exports the `hm-template` function with the following named argume
 
 `glossary (array)`: Glossary and acronym definitions used by the `gls` and `glspl` helpers (see section “Glossary and Acronyms”).
 
+`glossary-post-thesis (bool)`: Wether to show the glossary in the beginning or after the bibliography, default `false`(beginning).
+
 `bibliography (content)`: Bibliography function, for example `bibliography("references.bib")`.
 
 `bib-style (str)`: Bibliography style, default is `"ieee"`.
@@ -107,6 +109,8 @@ This template exports the `hm-template` function with the following named argume
 `list-of-figures (bool)`: Whether to show a list of figures, default is `true`.
 
 `list-of-code (bool)`: Whether to show a list of code snippets, default is `false`.
+
+`lists-of-post-thesis (bool)`: Wether to show the lists n the beginning or after the bibliography, default `false`(beginning).
 
 **Logos and layout**
 

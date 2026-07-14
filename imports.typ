@@ -3,6 +3,7 @@
 // Packages
 #import "@preview/linguify:0.5.0": *
 #import "@preview/glossarium:0.5.10": *
+#import "@preview/drafting:0.2.2": *
 
 // Template
 #import "colors.typ": *

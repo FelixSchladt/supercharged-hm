@@ -18,6 +18,7 @@
   abstract: none,
   acknowledgements: none,
   glossary: none,
+  glossary-post-thesis: false,
   bibliography: none,
   bib-style: "ieee",
   appendix: none,
@@ -27,6 +28,7 @@
   list-of-tables: true,
   list-of-figures: true,
   list-of-code: false,
+  lists-of-post-thesis: false,
   titlepage-logo: image("assets/HM_Logo_RGB.png", width: 40%),
   project-logo: none,
   chapter-heading-pagebreak: true,
@@ -284,41 +286,45 @@
     }
   }
 
-  if (list-of-tables) {
-    heading(level: 1, linguify("base_list_of_tables", from: lang-db))
-    outline(
-      title: none,
-      target: figure.where(kind: table),
-    )
-  }
+  if (not lists-of-post-thesis) {
+    if (list-of-tables) {
+      heading(level: 1, linguify("base_list_of_tables", from: lang-db))
+      outline(
+        title: none,
+        target: figure.where(kind: table),
+      )
+    }
 
-  if (list-of-figures) {
-    heading(level: 1, linguify("base_list_of_figures", from: lang-db))
-    outline(
-      title: none,
-      target: figure.where(kind: image),
-    )
-  }
+    if (list-of-figures) {
+      heading(level: 1, linguify("base_list_of_figures", from: lang-db))
+      outline(
+        title: none,
+        target: figure.where(kind: image),
+      )
+    }
 
-  if (list-of-code) {
-    heading(level: 1, linguify("base_list_of_code", from: lang-db))
-    outline(
-      title: none,
-      target: figure.where(kind: raw),
-    )
+    if (list-of-code) {
+      heading(level: 1, linguify("base_list_of_code", from: lang-db))
+      outline(
+        title: none,
+        target: figure.where(kind: raw),
+      )
 
+    }
   }
 
   // Display glossary.
-  if glossary != none {
-    heading(level: 1, linguify("base_glossary", from: lang-db))
-    set par(justify: false)
-    set list(spacing: 0.2em)
-    set block(spacing: 0.2em)
-    print-glossary(
-      glossary,
-      disable-back-references: true
-    )
+  if (not glossary-post-thesis) {
+    if glossary != none {
+      heading(level: 1, linguify("base_glossary", from: lang-db))
+      set par(justify: false)
+      set list(spacing: 0.2em)
+      set block(spacing: 0.2em)
+      print-glossary(
+        glossary,
+        disable-back-references: true
+      )
+    }
   }
 
   if not chapter-heading-pagebreak {
@@ -377,6 +383,47 @@
       style: bib-style
       )
     bibliography
+  }
+
+  // Display glossary.
+  if (glossary-post-thesis) {
+    if glossary != none {
+      heading(level: 1, linguify("base_glossary", from: lang-db))
+      set par(justify: false)
+      set list(spacing: 0.2em)
+      set block(spacing: 0.2em)
+      print-glossary(
+        glossary,
+        disable-back-references: true
+      )
+    }
+  }
+
+  if (lists-of-post-thesis) {
+    if (list-of-tables) {
+      heading(level: 1, linguify("base_list_of_tables", from: lang-db))
+      outline(
+        title: none,
+        target: figure.where(kind: table),
+      )
+    }
+
+    if (list-of-figures) {
+      heading(level: 1, linguify("base_list_of_figures", from: lang-db))
+      outline(
+        title: none,
+        target: figure.where(kind: image),
+      )
+    }
+
+    if (list-of-code) {
+      heading(level: 1, linguify("base_list_of_code", from: lang-db))
+      outline(
+        title: none,
+        target: figure.where(kind: raw),
+      )
+
+    }
   }
 
   // Continue the back-matter page counter for the appendix.
