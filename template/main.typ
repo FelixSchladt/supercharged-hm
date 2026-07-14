@@ -1,4 +1,4 @@
-#import "@preview/supercharged-hm:1.0.0": *
+#import "@preview/supercharged-hm:1.1.0": *
 #import "glossary.typ" : glossary
 
 #show: hm-template.with(

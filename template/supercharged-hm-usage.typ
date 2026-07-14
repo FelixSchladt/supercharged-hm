@@ -1,6 +1,6 @@
 // Copyright 2024 Felix Schladt https://github.com/FelixSchladt
 
-#import "@preview/supercharged-hm:1.0.0": *
+#import "@preview/supercharged-hm:1.1.0": *
 
 = Template Usage
 Small guide on the usage of the template and provided items.

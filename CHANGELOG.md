@@ -1,6 +1,6 @@
 # Supercharged-HM Changelog
 
-## [UNRELEASED]
+## [v1.1.0] - 2026-07-14
 
 - Fixed requirements references showing heading numbering (e.g. 3.2.2.1) instead of requirement id (e.g. R09).
 - Added `glossary-post-thesis: bool` and `lists-of-post-thesis: bool` options. These move the respective items from the start to behind the bibliography.
