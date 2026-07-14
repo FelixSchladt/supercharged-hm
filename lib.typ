@@ -192,6 +192,22 @@
   // contents
   set text(size: text-size)
 
+  // abstract
+  if (abstract != none) {
+    context {
+    set par(justify: true, leading: 1em)
+    set block(spacing: 2em)
+
+    align(
+      center + horizon,
+      heading(level: 1, numbering: none)[
+        #linguify("base_abstract", from: lang-db)
+      ])
+      text(abstract)
+    }
+    pagebreak()
+  }
+
   // TOC
   if toc-depth != none {
     {
@@ -270,21 +286,7 @@
       ])
       text(acknowledgements)
     }
-  }
-
-  if (abstract != none) {
-    context {
-    set par(justify: true, leading: 1em)
-    set block(spacing: 2em)
-
-    align(
-      center + horizon,
-      heading(level: 1, numbering: none)[
-        #linguify("base_abstract", from: lang-db)
-      ])
-      text(abstract)
-    }
-  }
+  } 
 
   if (not lists-of-post-thesis) {
     if (list-of-tables) {

@@ -4,6 +4,7 @@
 
 - Fixed requirements references showing heading numbering (e.g. 3.2.2.1) instead of requirement id (e.g. R09).
 - Added `glossary-post-thesis: bool` and `lists-of-post-thesis: bool` options. These move the respective items from the start to behind the bibliography.
+- Fixed abstract placement: Abstract was placed post toc, now pre TOC.
 
 ## [v1.0.0] - 2026-06-13
 
